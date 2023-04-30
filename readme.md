@@ -80,3 +80,15 @@ context.lineTo(100, 0);
 context.stroke();
 context.closePath();
 ```
+
+**how to draw ark**
+
+```js
+context.beginPath();
+context.strokeStyle = "black";
+context.lineWidth = 5;
+context.arc(100, 100, 20, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
+//full circle
+context.stroke();
+context.closePath();
+```

@@ -4,31 +4,17 @@ export const drawScreen = (
   ctx: CanvasRenderingContext2D,
   canvasSettings: CanvasSettings
 ) => {
-  // Sample 1: round end, bevel join, at top left of canvas
+  ctx.beginPath();
   ctx.strokeStyle = "black";
-  ctx.lineWidth = 10;
-  ctx.lineJoin = "bevel";
-  ctx.lineCap = "round";
-  ctx.beginPath();
+  ctx.lineWidth = 5;
+  // centerX,centerY,radius,startAngle,endEngle,anticlockwise is a true or false value that defines the direction of the arc.
+  // ctx.arc(100, 100, 95, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
+  // ctx.arc(100, 200, 20, (Math.PI / 180) * 0, (Math.PI / 180) * 90, false);
   ctx.moveTo(0, 0);
-  ctx.lineTo(25, 0);
-  ctx.lineTo(25, 25);
-  ctx.stroke();
-  ctx.closePath();
-  // Sample 2: round end, bevel join, not at top or left of canvas
-  ctx.beginPath();
-  ctx.moveTo(10, 50);
-  ctx.lineTo(35, 50);
-  ctx.lineTo(35, 75);
-  ctx.stroke();
-  ctx.closePath();
-  // Sample 3: flat end, round join, not at top or left of canvas
-  ctx.lineJoin = "round";
-  ctx.lineCap = "butt";
-  ctx.beginPath();
-  ctx.moveTo(10, 100);
-  ctx.lineTo(35, 100);
-  ctx.lineTo(35, 125);
+  ctx.lineTo(100, 200);
+  // page 43
+  ctx.arcTo(350, 350, 250, 350, 64);
+  //full circle
   ctx.stroke();
   ctx.closePath();
 
