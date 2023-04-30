@@ -1,6 +1,6 @@
 import "./style.css";
 import styles from "./Game.module.css";
-import { initGameGuessTheLater } from "./ch1";
+import { initCh2 } from "./ch2";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div id="game-container" class="${styles.gameContainer}">
@@ -18,5 +18,5 @@ const canvasSettings = {
 };
 
 if (ctx) {
-  initGameGuessTheLater(ctx, canvasSettings);
+  initCh2(ctx, canvasSettings);
 }
