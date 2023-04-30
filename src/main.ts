@@ -9,6 +9,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `;
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+// const W = (canvas.width = canvas.clientWidth * devicePixelRatio);
+// const H = (canvas.height = canvas.clientHeight * devicePixelRatio);
 const W = (canvas.width = canvas.clientWidth);
 const H = (canvas.height = canvas.clientHeight);
 const ctx = canvas.getContext("2d");
