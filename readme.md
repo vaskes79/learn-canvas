@@ -1,9 +1,9 @@
 # Learn how to working with canvas
 
 Read book [HTML5 Canvas | Fulton Jeff
-[src](https://github.com/mattpardee/html5canvas)
 
-- Fulton Steve](https://www.amazon.com/HTML5-Canvas-Steve-Fulton/dp/144939390X)
+- [Fulton Steve](https://www.amazon.com/HTML5-Canvas-Steve-Fulton/dp/144939390X)
+- [src](https://github.com/mattpardee/html5canvas)
 
 ## chapter 1
 
