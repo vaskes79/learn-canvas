@@ -1,6 +1,7 @@
 # Learn how to working with canvas
 
 Read book [HTML5 Canvas | Fulton Jeff
+[src](https://github.com/mattpardee/html5canvas)
 
 - Fulton Steve](https://www.amazon.com/HTML5-Canvas-Steve-Fulton/dp/144939390X)
 
@@ -60,4 +61,4 @@ Properties include
 
 ### Another Example: Guess The Letter
 
-First game
+[Guess The Letter](https://github.com/vaskes79/learn-canvas/commit/5b3b832f2e2cfcf8e7f8a754b7579ea9ab713dc1)
