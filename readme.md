@@ -62,3 +62,5 @@ Properties include
 ### Another Example: Guess The Letter
 
 [Guess The Letter](https://github.com/vaskes79/learn-canvas/commit/5b3b832f2e2cfcf8e7f8a754b7579ea9ab713dc1)
+
+## chapter 2 Drawing on the Canvas
