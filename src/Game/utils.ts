@@ -4,3 +4,7 @@ export const initGame = (elem: HTMLElement) => {
     new Game(elem);
   }
 };
+
+export function degreesToradians(degrees: number) {
+  return degrees * (Math.PI / 180);
+}
