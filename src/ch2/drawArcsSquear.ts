@@ -1,6 +1,5 @@
 import { degreesToradians } from "../Game";
-
-type SegmentArc = "topRight" | "topLeft" | "bottomRight" | "bottomLeft";
+import { SegmentArc } from "./types";
 
 export const drawArcsSquear = (
   ctx: CanvasRenderingContext2D,
