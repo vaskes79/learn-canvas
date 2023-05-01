@@ -81,14 +81,34 @@ context.stroke();
 context.closePath();
 ```
 
-**how to draw ark**
+**how to draw arc page 44**
 
 ```js
 context.beginPath();
 context.strokeStyle = "black";
 context.lineWidth = 5;
+// centerX,centerY, radius, startAngleInRadians, endEngleInradians, anticlockwise
+// last params direction drawing on clock or another direction
 context.arc(100, 100, 20, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
 //full circle
 context.stroke();
 context.closePath();
+```
+
+**how to draw arc use arcTo**
+
+Что бы нарисовать дугу нужно построить две касательные. Радиус дожен укладываться в эти две касательные. В премере функции [drawArcsSquare2](https://github.com/vaskes79/learn-canvas/commit/ff9151b8b2bdf69f725888a47a46353a62715f4d)
+
+- move to the start drawing `moveTo`
+- middleX and middleY end coordinate for first line that for build arc
+- for build second line we start on previos point and set end coordinate to the posX, middleY
+- radius should be in diaposone between lines
+
+```js
+ctx.beginPath();
+ctx.strokeStyle = color;
+ctx.lineWidth = lineWidth;
+ctx.moveTo(middleX, posY);
+ctx.arcTo(middleX, middleY, posX, middleY, radius);
+ctx.stroke();
 ```
