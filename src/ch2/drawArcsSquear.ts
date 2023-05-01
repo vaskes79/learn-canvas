@@ -1,37 +1,37 @@
 import { degreesToradians } from "../Game";
 
-type SegmentArk = "topRight" | "topLeft" | "bottomRight" | "bottomLeft";
+type SegmentArc = "topRight" | "topLeft" | "bottomRight" | "bottomLeft";
 
-export const drawArckSquear = (
+export const drawArcsSquear = (
   ctx: CanvasRenderingContext2D,
   opt: {
     tileSize: number;
     posX: number;
     posY: number;
-    segment?: SegmentArk;
+    segment?: SegmentArc;
   }
 ) => {
   const { posX = 0, posY = 0, tileSize = 128, segment } = opt;
   const radius = tileSize / 2;
 
   if (segment) {
-    drawArkSegment(ctx, posX, posY, radius, tileSize, segment);
+    drawArcSegment(ctx, posX, posY, radius, tileSize, segment);
     return;
   }
 
-  drawArkSegment(ctx, posX, posY, radius, tileSize, "topRight");
-  drawArkSegment(ctx, posX, posY, radius, tileSize, "topLeft");
-  drawArkSegment(ctx, posX, posY, radius, tileSize, "bottomRight");
-  drawArkSegment(ctx, posX, posY, radius, tileSize, "bottomLeft");
+  drawArcSegment(ctx, posX, posY, radius, tileSize, "topRight");
+  drawArcSegment(ctx, posX, posY, radius, tileSize, "topLeft");
+  drawArcSegment(ctx, posX, posY, radius, tileSize, "bottomRight");
+  drawArcSegment(ctx, posX, posY, radius, tileSize, "bottomLeft");
 };
 
-const drawArkSegment = (
+const drawArcSegment = (
   ctx: CanvasRenderingContext2D,
   posX: number,
   posY: number,
   radius: number,
   tileSize: number,
-  segment: SegmentArk,
+  segment: SegmentArc,
 
   color?: string
 ) => {

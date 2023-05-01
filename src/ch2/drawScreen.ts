@@ -1,17 +1,17 @@
 import { CanvasSettings } from "../types";
-import { drawArckSquear } from "./drawArcksSquear";
+import { drawArcsSquear } from "./drawArcsSquear";
 
 export const drawScreen = (
   ctx: CanvasRenderingContext2D,
   canvasSettings: CanvasSettings
 ) => {
-  drawArckSquear(ctx, {
+  drawArcsSquear(ctx, {
     tileSize: 64,
     posX: 100,
     posY: 100,
   });
 
-  drawArckSquear(ctx, {
+  drawArcsSquear(ctx, {
     tileSize: 128,
     posX: 500,
     posY: 500,
