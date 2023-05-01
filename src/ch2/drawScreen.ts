@@ -4,31 +4,32 @@ export const drawScreen = (
   ctx: CanvasRenderingContext2D,
   canvasSettings: CanvasSettings
 ) => {
-  // Define the points as {x, y}
-  let start = { x: 50, y: 20 };
-  let cp1 = { x: 330, y: 30 };
-  let cp2 = { x: 150, y: 80 };
-  let end = { x: 250, y: 100 };
-
-  // Cubic Bézier curve
+  //draw a big box on the screen
+  ctx.fillStyle = "black";
+  ctx.fillRect(10, 10, 200, 200);
+  ctx.save();
+  //clip the canvas to a 50×50 square starting at 0,0 ctx.rect(0, 0, 50, 50);
   ctx.beginPath();
-  ctx.moveTo(start.x, start.y);
-  ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+  ctx.clip();
+  //red circle
+  ctx.beginPath();
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 5;
+  ctx.arc(120, 120, 100, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false); //full circle
   ctx.stroke();
-
-  // Start and end points
-  ctx.fillStyle = "blue";
+  ctx.closePath();
+  ctx.restore();
+  //reclip to the entire canvas
   ctx.beginPath();
-  ctx.arc(start.x, start.y, 5, 0, 2 * Math.PI); // Start point
-  ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI); // End point
-  ctx.fill();
-
-  // Control points
-  ctx.fillStyle = "red";
+  ctx.rect(0, 0, 500, 500);
+  ctx.clip();
+  //draw a blue line that is not clipped
   ctx.beginPath();
-  ctx.arc(cp1.x, cp1.y, 5, 0, 2 * Math.PI); // Control point one
-  ctx.arc(cp2.x, cp2.y, 5, 0, 2 * Math.PI); // Control point two
-  ctx.fill();
+  ctx.strokeStyle = "blue";
+  ctx.lineWidth = 5;
+  ctx.arc(100, 100, 50, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false); //full circle
+  ctx.stroke();
+  ctx.closePath();
 
   console.log(canvasSettings);
 };
