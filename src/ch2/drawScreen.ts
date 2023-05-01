@@ -4,30 +4,47 @@ export const drawScreen = (
   ctx: CanvasRenderingContext2D,
   canvasSettings: CanvasSettings
 ) => {
-  //draw a big box on the screen
-  ctx.fillStyle = "black"; //need list of available colors
-  ctx.fillRect(10, 10, 200, 200);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  var angleInRadians = (45 * Math.PI) / 180;
+  var x = 50;
+  var y = 100;
+  var width = 40;
+  var height = 40;
+  ctx.translate(x + 0.5 * width, y + 0.5 * height);
+  ctx.rotate(angleInRadians);
+  ctx.fillStyle = "red";
+  ctx.fillRect(-0.5 * width, -0.5 * height, width, height);
 
-  //leave golbal composite operation as is
-  //now draw a red square
-  ctx.fillStyle = "red"; //need list of available colors
-  ctx.fillRect(1, 1, 50, 50);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  var angleInRadians = (75 * Math.PI) / 180;
+  var x = 100;
+  var y = 100;
+  var width = 40;
+  var height = 40;
+  ctx.translate(x + 0.5 * width, y + 0.5 * height);
+  ctx.rotate(angleInRadians);
+  ctx.fillStyle = "green";
+  ctx.fillRect(-0.5 * width, -0.5 * height, width, height);
 
-  //now set it to source-over
-  ctx.globalCompositeOperation = "source-over";
-  //draw a red square next to the other one
-  ctx.fillRect(60, 1, 50, 50);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  var angleInRadians = (90 * Math.PI) / 180;
+  var x = 150;
+  var y = 100;
+  var width = 40;
+  var height = 40;
+  ctx.translate(x + 0.5 * width, y + 0.5 * height);
+  ctx.rotate(angleInRadians);
+  ctx.fillStyle = "blue";
+  ctx.fillRect(-0.5 * width, -0.5 * height, width, height);
 
-  //now set to destination-atop
-  ctx.globalCompositeOperation = "destination-atop";
-  ctx.fillRect(1, 60, 50, 50);
-
-  //now set globalAlpha
-  ctx.globalAlpha = 0.5;
-
-  //now set to source-atop
-  ctx.globalCompositeOperation = "source-atop";
-  ctx.fillRect(60, 60, 50, 50);
-
-  // console.log(canvasSettings);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  var angleInRadians = (120 * Math.PI) / 180;
+  var x = 200;
+  var y = 100;
+  var width = 40;
+  var height = 40;
+  ctx.translate(x + 0.5 * width, y + 0.5 * height);
+  ctx.rotate(angleInRadians);
+  ctx.fillStyle = "orange";
+  ctx.fillRect(-0.5 * width, -0.5 * height, width, height);
 };
