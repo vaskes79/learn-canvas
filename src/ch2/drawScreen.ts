@@ -1,43 +1,34 @@
 import { CanvasSettings } from "../types";
-import { drawArcsSquare } from "./drawArcsSquare2";
 
 export const drawScreen = (
   ctx: CanvasRenderingContext2D,
   canvasSettings: CanvasSettings
 ) => {
-  drawArcsSquare(ctx, {
-    tileSize: 128,
-    posX: 100,
-    posY: 500,
-    color: "green",
-    segment: "topRight",
-    showDebug: true,
-  });
+  // Define the points as {x, y}
+  let start = { x: 50, y: 20 };
+  let cp1 = { x: 330, y: 30 };
+  let cp2 = { x: 150, y: 80 };
+  let end = { x: 250, y: 100 };
 
-  drawArcsSquare(ctx, {
-    tileSize: 128,
-    posX: 300,
-    posY: 100,
-    color: "red",
-    segment: "topLeft",
-    showDebug: true,
-  });
+  // Cubic Bézier curve
+  ctx.beginPath();
+  ctx.moveTo(start.x, start.y);
+  ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+  ctx.stroke();
 
-  drawArcsSquare(ctx, {
-    tileSize: 128,
-    posX: 100,
-    posY: 100,
-    color: "blue",
-    segment: "bottomRight",
-  });
+  // Start and end points
+  ctx.fillStyle = "blue";
+  ctx.beginPath();
+  ctx.arc(start.x, start.y, 5, 0, 2 * Math.PI); // Start point
+  ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI); // End point
+  ctx.fill();
 
-  drawArcsSquare(ctx, {
-    tileSize: 128,
-    posX: 300,
-    posY: 500,
-    color: "orange",
-    segment: "bottomLeft",
-  });
+  // Control points
+  ctx.fillStyle = "red";
+  ctx.beginPath();
+  ctx.arc(cp1.x, cp1.y, 5, 0, 2 * Math.PI); // Control point one
+  ctx.arc(cp2.x, cp2.y, 5, 0, 2 * Math.PI); // Control point two
+  ctx.fill();
 
   console.log(canvasSettings);
 };
