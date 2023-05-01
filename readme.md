@@ -147,3 +147,18 @@ context.closePath();
 
 - `globalAlpha`
 - `globalCompositeOperation`
+
+### rotation example 56
+
+```js
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+var angleInRadians = (45 * Math.PI) / 180;
+var x = 50;
+var y = 100;
+var width = 40;
+var height = 40;
+ctx.translate(x + 0.5 * width, y + 0.5 * height);
+ctx.rotate(angleInRadians);
+ctx.fillStyle = "red";
+ctx.fillRect(-0.5 * width, -0.5 * height, width, height);
+```
