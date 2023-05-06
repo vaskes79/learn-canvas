@@ -162,3 +162,14 @@ ctx.rotate(angleInRadians);
 ctx.fillStyle = "red";
 ctx.fillRect(-0.5 * width, -0.5 * height, width, height);
 ```
+
+## Math, Physics, and Animation chapter 5
+
+### Uniform Circular Motion
+
+**how to find `x` and `y` on radius**
+
+```js
+x = radius * cosine(angle);
+y = radius * sine(angle);
+```

@@ -8,3 +8,11 @@ export const initGame = (elem: HTMLElement) => {
 export function degreesToradians(degrees: number) {
   return degrees * (Math.PI / 180);
 }
+
+export function incrementAngle(angle: number) {
+  angle++;
+  if (angle > 360) {
+    angle = 0;
+  }
+  return angle;
+}

@@ -5,5 +5,12 @@ export const initCh2 = (
   ctx: CanvasRenderingContext2D,
   canvasSettings: CanvasSettings
 ) => {
-  drawScreen(ctx, canvasSettings);
+  function gameLoop() {
+    window.setTimeout(gameLoop, 20);
+
+    console.log("gameLoop");
+    drawScreen(ctx, canvasSettings);
+  }
+
+  gameLoop();
 };
