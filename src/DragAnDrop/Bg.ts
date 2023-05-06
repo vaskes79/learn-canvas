@@ -5,6 +5,8 @@ export class Bg {
 
   constructor(private _layer: Layer) {
     this.options = {};
+    this._layer.canvas.style.position = "absolute";
+    this._layer.canvas.style.zIndex = "1";
   }
 
   display = () => {
