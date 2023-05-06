@@ -24,3 +24,17 @@ export function getRandomNumber(min: number = 0, max: number = 100) {
 export function generateItems<T>(numberOfItems: number, callback: () => T) {
   return new Array(numberOfItems).fill(numberOfItems).map(callback);
 }
+
+export function cursorInRect(
+  mouseX: number,
+  mouseY: number,
+  rectX: number,
+  rectY: number,
+  rectW: number,
+  rectH: number
+) {
+  let xLine = mouseX > rectX && mouseX < rectX + rectW;
+  let yLine = mouseY > rectY && mouseY < rectY + rectH;
+
+  return xLine && yLine;
+}
