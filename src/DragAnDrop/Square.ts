@@ -28,8 +28,8 @@ export class Squere {
     this._selected = !this._selected;
   };
 
-  activate = () => {
-    this._active = !this._active;
+  activate = (isActive: boolean) => {
+    this._active = isActive;
   };
 
   display = (ctx: CanvasRenderingContext2D) => {
@@ -86,4 +86,16 @@ export class Squere {
     ctx.fillText(yLabel, -30, 0);
     ctx.restore();
   };
+
+  get xPos() {
+    return this._x;
+  }
+
+  get yPos() {
+    return this._y;
+  }
+
+  get size() {
+    return this._size;
+  }
 }
