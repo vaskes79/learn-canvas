@@ -3,6 +3,10 @@ export class Layer {
   ctx: CanvasRenderingContext2D;
   W: number = 0;
   H: number = 0;
+  // Scaled devicePixelRatio width value
+  sW: number = 0;
+  // Scaled devicePixelRatio height value
+  sH: number = 0;
   _dp: number;
 
   constructor(container: HTMLElement) {
@@ -12,6 +16,7 @@ export class Layer {
     this._dp = devicePixelRatio;
 
     this.mount();
+
     this.fitToContainer();
   }
 
@@ -28,6 +33,8 @@ export class Layer {
     this.H = this.canvas.height = Math.floor(
       this.canvas.clientHeight * this._dp
     );
+    this.sW = this.W / devicePixelRatio;
+    this.sH = this.H / devicePixelRatio;
     this.ctx.scale(this._dp, this._dp);
   };
 }
