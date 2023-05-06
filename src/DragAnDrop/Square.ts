@@ -54,6 +54,14 @@ export class Squere {
 
       ctx.restore();
     }
+
+    ctx.fillRect(this._x, this._y, this._size, this._size);
+
+    if (this._selected) {
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = this._activeColor2;
+      ctx.strokeRect(this._x, this._y, this._size, this._size);
+    }
   };
 
   private _drawCoords = (
