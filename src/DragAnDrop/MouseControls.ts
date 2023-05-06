@@ -30,7 +30,6 @@ export class MouseControls {
 
   private _changeState = (e: MouseEvent) => {
     const rect = this._container.getBoundingClientRect();
-
     this.position.x = e.clientX - rect.left;
     this.position.y = e.clientY - rect.top;
 

@@ -1,4 +1,5 @@
 import { Game } from "../Game";
+import { Position } from "../types";
 export const initGame = (elem: HTMLElement) => {
   if (elem) {
     new Game(elem);
@@ -26,15 +27,24 @@ export function generateItems<T>(numberOfItems: number, callback: () => T) {
 }
 
 export function cursorInRect(
-  mouseX: number,
-  mouseY: number,
-  rectX: number,
-  rectY: number,
-  rectW: number,
-  rectH: number
+  mousePos: Position,
+  rect: { x: number; y: number; w: number; h: number }
 ) {
-  let xLine = mouseX > rectX && mouseX < rectX + rectW;
-  let yLine = mouseY > rectY && mouseY < rectY + rectH;
+  if (mousePos.x && mousePos.y) {
+    let xLine = mousePos.x > rect.x && mousePos.x < rect.x + rect.w;
+    let yLine = mousePos.y > rect.y && mousePos.y < rect.y + rect.h;
 
-  return xLine && yLine;
+    return xLine && yLine;
+  }
+  return false;
+}
+
+export function getOffsetCoords(mouse: Position, rect: Position) {
+  if (mouse.x && mouse.y && rect.x && rect.y) {
+    return {
+      x: mouse.x - rect.x,
+      y: mouse.y - rect.y,
+    };
+  }
+  return { x: 0, y: 0 };
 }

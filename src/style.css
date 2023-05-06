@@ -40,7 +40,6 @@ h1 {
 }
 
 #app {
-  max-width: var(--root-w);
   height: 100vh;
   margin: 0 auto;
   padding: 2rem;

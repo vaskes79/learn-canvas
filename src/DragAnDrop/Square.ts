@@ -1,8 +1,11 @@
+import { Position } from "./types";
+
 export class Squere {
   private _selected: boolean;
   private _active: boolean;
   private _activeColor: string;
   private _activeColor2: string;
+  offset: Position = { x: 0, y: 0 };
 
   constructor(
     private _x: number,
@@ -24,8 +27,8 @@ export class Squere {
     this._x += 0.1;
   };
 
-  select = () => {
-    this._selected = !this._selected;
+  select = (isSelected: boolean) => {
+    this._selected = isSelected;
   };
 
   activate = (isActive: boolean) => {
@@ -87,15 +90,30 @@ export class Squere {
     ctx.restore();
   };
 
-  get xPos() {
+  get x() {
     return this._x;
   }
+  set x(xPos: number) {
+    this._x = xPos;
+  }
 
-  get yPos() {
+  get y() {
     return this._y;
   }
 
+  set y(yPos: number) {
+    this._y = yPos;
+  }
+
   get size() {
+    return this._size;
+  }
+
+  get w() {
+    return this._size;
+  }
+
+  get h() {
     return this._size;
   }
 }

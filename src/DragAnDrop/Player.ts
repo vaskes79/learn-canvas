@@ -3,6 +3,7 @@ import {
   getRandomColor,
   generateItems,
   cursorInRect,
+  getOffsetCoords,
 } from "./utils";
 import type { KeyboardControls } from "./KeyboardControls";
 import type { Layer } from "./Layer";
@@ -32,19 +33,30 @@ export class Player {
     );
   }
 
-  update = (correction: number) => {
-    const { position } = this._mouse;
+  update = () => {
+    const { position, isPressed, isDown } = this._mouse;
+
     if (position.x && position.y) {
       this._itemsList.forEach((item) => {
-        const isActive = cursorInRect(
-          position.x || 0,
-          position.y || 0,
-          item.xPos,
-          item.yPos,
-          item.size,
-          item.size
-        );
+        const isActive = cursorInRect(position, item);
+        const isSelected = isActive && isPressed;
         item.activate(isActive);
+        item.select(isSelected);
+
+        if (isDown && isActive) {
+          item.offset = getOffsetCoords(position, item);
+        }
+
+        if (
+          isSelected &&
+          position.x &&
+          position.y &&
+          item.offset.x &&
+          item.offset.y
+        ) {
+          item.x = position.x - item.offset.x;
+          item.y = position.y - item.offset.y;
+        }
         item.display(this._layer.ctx);
       });
     }

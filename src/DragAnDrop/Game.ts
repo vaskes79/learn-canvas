@@ -25,7 +25,7 @@ export class Game {
   }
 
   update = (correction: number) => {
-    this.player.update(correction);
+    this.player.update();
     this.mouse.update();
   };
 
