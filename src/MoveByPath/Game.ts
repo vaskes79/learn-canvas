@@ -34,8 +34,4 @@ export class Game {
     this.bg.display();
   };
 
-  setSpeedPlayer = (speed: number) => {
-    this.player.options.vx = speed;
-    this.player.options.vy = speed;
-  };
 }
