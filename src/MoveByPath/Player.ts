@@ -13,7 +13,6 @@ export class Player {
     private _mouse: MouseControls,
     private _keyboard: KeyboardControls
   ) {
-
     this.loco = new Locomotive(this._layer.ctx, {
       speed: 100,
       position: {
@@ -21,71 +20,27 @@ export class Player {
         y: 128,
       },
       tileSize: 128,
-      type: 'steam'
-    })
+      type: "steam",
+    });
 
-    this.wagons = ['cargo', 'cargo']
+    this.wagons = ["cargo", "cargo"];
 
     console.log(this._mouse);
     console.log(this._layer);
     console.log(this._keyboard);
+    console.log(this.loco);
   }
 
   update = (correction: number) => {
-    this._layer.ctx.clearRect(0, 0, this._layer.sW, this._layer.sH);
-
     if (this._keyboard.keys.Space) {
       this.isRunning = !this.isRunning;
     }
 
     this.loco.update(correction, this.isRunning);
-
   };
 
-
   display = () => {
-    this.loco.display()
-    this.loco.addPathPoint({
-      x: 128 * 2,
-      y: 128,
-      type: "horizontal",
-      direction: "right",
-    })
-    this.loco.addPathPoint({
-      x: 128 * 3,
-      y: 128 * 2,
-      type: "bottomLeft",
-      direction: "bottom",
-    })
-    this.loco.addPathPoint({
-      x: 128 * 3,
-      y: 128 * 2,
-      type: "vertical",
-      direction: "bottom",
-    })
-    this.loco.addPathPoint({
-      x: 128 * 3,
-      y: 128 * 3,
-      type: "vertical",
-      direction: "bottom",
-    })
-    this.loco.addPathPoint({
-      x: 128 * 3,
-      y: 128 * 4,
-      type: "topLeft",
-      direction: "bottom",
-    })
-    this.loco.addPathPoint({
-      x: 128 * 2,
-      y: 128 * 4,
-      type: "horizontal",
-      direction: "left",
-    })
-    this.loco.addPathPoint({
-      x: 128,
-      y: 128 * 4,
-      type: "horizontal",
-      direction: "left",
-    })
+    this._layer.ctx.clearRect(0, 0, this._layer.W, this._layer.H);
+    this.loco.display();
   };
 }

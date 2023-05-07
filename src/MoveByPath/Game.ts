@@ -33,5 +33,4 @@ export class Game {
     this.player.display();
     this.bg.display();
   };
-
 }
