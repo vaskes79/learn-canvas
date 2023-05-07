@@ -1,11 +1,13 @@
-import { mockPointsSquere } from "../costants";
+import { mockPointsRoundCorender } from "../costants";
 import type { LocomotiveOptions, Point } from "./types";
+import { rotateObject } from "../utils";
 
 export class Locomotive {
   x: number;
   y: number;
   w: number = 32;
   h: number = 64;
+  angle: number = 45;
   private _path: Point[] = [];
   private _destination: Point | undefined;
 
@@ -15,7 +17,7 @@ export class Locomotive {
   ) {
     this.x = this._opt.position.x || 0;
     this.y = this._opt.position.y || 0;
-    this._path = mockPointsSquere;
+    this._path = mockPointsRoundCorender;
     this._destination = this._path.shift();
     console.log("LocoInit: ", { path: this._path, dest: this._destination });
   }
@@ -37,13 +39,19 @@ export class Locomotive {
   };
 
   private _drawSteamLoco = () => {
+    this._ctx.save();
+    rotateObject(this._ctx, this);
     this._ctx.fillStyle = "red";
     this._ctx.fillRect(this.x, this.y, this.w, this.h);
+    this._ctx.restore();
   };
 
   private _drawElectroLoco = () => {
+    this._ctx.save();
+    rotateObject(this._ctx, this);
     this._ctx.fillStyle = "green";
     this._ctx.fillRect(this.x, this.y, this.w, this.h);
+    this._ctx.restore();
   };
 
   private _move(correction: number) {
@@ -82,6 +90,13 @@ export class Locomotive {
       ) {
         this.y -= this._opt.speed * correction;
         return;
+      }
+
+      if (
+        this._destination.type === "bottomLeft" &&
+        this._destination.direction === "bottom"
+      ) {
+        // need implement rotation
       }
 
       if (this._path.length > 0) {

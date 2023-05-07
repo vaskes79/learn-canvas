@@ -40,7 +40,7 @@ export class Player {
   };
 
   display = () => {
-    this._layer.ctx.clearRect(0, 0, this._layer.W, this._layer.H);
+    this._layer.ctx.clearRect(0, 0, this._layer.sW, this._layer.sH);
     this.loco.display();
   };
 }
