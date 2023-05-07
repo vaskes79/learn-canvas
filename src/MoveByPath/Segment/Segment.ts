@@ -22,7 +22,6 @@ export class Segment {
     this.y = this._opt.position.y || 0;
     this._middleW = this._opt.w / 2;
     this._middleH = this._opt.h / 2;
-
   }
 
 
