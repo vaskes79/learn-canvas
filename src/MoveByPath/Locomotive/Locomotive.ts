@@ -7,7 +7,7 @@ export class Locomotive {
   y: number;
   w: number = 32;
   h: number = 64;
-  angle: number = 45;
+  angle: number = 90;
   private _path: Point[] = [];
   private _destination: Point | undefined;
 
@@ -94,9 +94,50 @@ export class Locomotive {
 
       if (
         this._destination.type === "bottomLeft" &&
-        this._destination.direction === "bottom"
+        this._destination.direction === "bottom" &&
+        180 >= this.angle
       ) {
-        // need implement rotation
+        this.x += this._opt.speed * correction;
+        this.y += this._opt.speed * correction;
+        this.angle += this._opt.speed * correction;
+        return;
+      }
+
+      if (
+        this._destination.type === "topLeft" &&
+        this._destination.direction === "bottom" &&
+        270 >= this.angle
+      ) {
+        this.x -= this._opt.speed * correction;
+        this.y += this._opt.speed * correction;
+        this.angle += this._opt.speed * correction;
+        return;
+      }
+
+      if (
+        this._destination.type === "topRight" &&
+        this._destination.direction === "top" &&
+        360 >= this.angle
+      ) {
+        this.x -= this._opt.speed * correction;
+        this.y -= this._opt.speed * correction;
+        this.angle += this._opt.speed * correction;
+        return;
+      }
+
+      if (this.angle >= 360) {
+        this.angle = 0;
+      }
+
+      if (
+        this._destination.type === "topLeft" &&
+        this._destination.direction === "top" &&
+        90 >= this.angle
+      ) {
+        this.x += this._opt.speed * correction;
+        this.y -= this._opt.speed * correction;
+        this.angle += this._opt.speed * correction;
+        return;
       }
 
       if (this._path.length > 0) {

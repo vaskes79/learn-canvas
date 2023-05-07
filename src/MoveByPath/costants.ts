@@ -89,4 +89,10 @@ export const mockPointsRoundCorender: Point[] = [
     type: "vertical",
     direction: "top",
   },
+  {
+    x: 128,
+    y: 128,
+    type: "topLeft",
+    direction: "top",
+  },
 ];
