@@ -1,6 +1,6 @@
 import "./style.css";
 import styles from "./Game.module.css";
-import { Game as DragAndDropGame } from "./DragAnDrop";
+import { Game } from "./GameTemplate";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div id="game-container" class="${styles.gameContainer}">
@@ -10,5 +10,5 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 const gameContainer = document.getElementById("game-container");
 
 if (gameContainer) {
-  new DragAndDropGame(gameContainer);
+  new Game(gameContainer);
 }

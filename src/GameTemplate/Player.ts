@@ -46,6 +46,7 @@ export class Player {
       this.options.y += 3;
       this.options.isCrouch = true;
     }
+
     if (!this._keyboard.keys.KeyS && this.options.h < this.options.maxH) {
       this.options.h += 3;
       this.options.isCrouch = false;
@@ -54,6 +55,7 @@ export class Player {
     if (this._keyboard.keys.KeyD) {
       this.options.x += this.options.vx * correction;
     }
+
     if (this._keyboard.keys.KeyA) {
       this.options.x -= this.options.vx * correction;
     }
@@ -72,16 +74,16 @@ export class Player {
     } else {
       this.options.vy = 0;
     }
+
     this.options.y += this.options.vy;
 
-    if (this.options.y + this.options.h >= this._layer.H) {
-      this.options.y = this._layer.H - this.options.h;
+    if (this.options.y + this.options.h >= this._layer.sH) {
       this.options.isAir = false;
     }
   };
 
   display = () => {
-    this._layer.ctx.clearRect(0, 0, this._layer.W, this._layer.H);
+    this._layer.ctx.clearRect(0, 0, this._layer.sW, this._layer.sH);
     this._layer.ctx.fillStyle = this.options.color;
     this._layer.ctx.fillRect(
       this.options.x,

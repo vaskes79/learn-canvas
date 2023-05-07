@@ -1,3 +1,4 @@
+import { Bg } from "./Bg";
 import { KeyboardControls } from "./KeyboardControls";
 import { Layer } from "./Layer";
 import { Loop } from "./Loop";
@@ -6,17 +7,19 @@ import { Player } from "./Player";
 import { KeysPlayer } from "./costants";
 
 export class Game {
-  layer: Layer;
   player: Player;
+  bg: Bg;
   mouse: MouseControls;
   loopControls: Loop;
   keyboard: KeyboardControls;
 
   constructor(private _container: HTMLElement) {
-    this.layer = new Layer(this._container);
+    const bgLayer = new Layer(this._container, 1);
+    const playerLayer = new Layer(this._container, 2);
     this.mouse = new MouseControls(this._container);
     this.keyboard = new KeyboardControls(KeysPlayer);
-    this.player = new Player(this.layer, this.mouse, this.keyboard);
+    this.player = new Player(playerLayer, this.mouse, this.keyboard);
+    this.bg = new Bg(bgLayer);
 
     this.loopControls = new Loop(this.update, this.display);
   }
@@ -28,6 +31,7 @@ export class Game {
 
   display = () => {
     this.player.display();
+    this.bg.display();
   };
 
   setSpeedPlayer = (speed: number) => {
