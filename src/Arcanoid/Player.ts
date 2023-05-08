@@ -1,6 +1,8 @@
+import { Ball } from "./Ball";
 import type { KeyboardControls } from "./KeyboardControls";
 import type { Layer } from "./Layer";
 import type { MouseControls } from "./MouseControls";
+import { platformHeight, platformWidth } from "./costants";
 
 export class Player {
   options: {
@@ -12,6 +14,8 @@ export class Player {
     vy: number;
     color: string;
   };
+  isRunning: boolean = false;
+  ball: Ball
 
   constructor(
     private _layer: Layer,
@@ -19,14 +23,15 @@ export class Player {
     private _keyboard: KeyboardControls
   ) {
     this.options = {
-      x: this._layer.sW / 2 - 100,
-      y: this._layer.sH - 32,
-      w: 200,
-      h: 32,
+      x: this._layer.sW / 2 - platformWidth / 2,
+      y: this._layer.sH - platformHeight,
+      w: platformWidth,
+      h: platformHeight,
       vx: 700,
       vy: 0,
       color: `orange`,
     };
+    this.ball = new Ball(this._layer);
     console.log(this._mouse);
   }
 
@@ -40,6 +45,14 @@ export class Player {
 
     if (this._keyboard.keys.KeyA && 0 < leftEdgePltatform) {
       this.options.x -= this.options.vx * correction;
+    }
+
+    if (!this.isRunning) {
+      this.ball.x = this.options.x + this.options.w / 2;
+    }
+
+    if (this.isRunning) {
+      this.ball.isRunning = true;
     }
 
     // if (
@@ -62,5 +75,6 @@ export class Player {
       this.options.w,
       this.options.h
     );
+    this.ball.display();
   };
 }
