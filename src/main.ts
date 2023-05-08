@@ -1,6 +1,6 @@
 import "./style.css";
 import styles from "./Game.module.css";
-import { Game } from "./GameTemplate";
+import { Game } from "./MoveByPath";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div id="game-container" class="${styles.gameContainer}">

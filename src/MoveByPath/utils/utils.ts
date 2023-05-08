@@ -6,8 +6,8 @@ export const initGame = (elem: HTMLElement) => {
   }
 };
 
-export function degreesToradians(degrees: number) {
-  return degrees * (Math.PI / 180);
+export function degreesToradians(degrees: number, spin: -1 | 1 = 1) {
+  return degrees * (Math.PI / 360) * spin;
 }
 
 export function incrementAngle(angle: number) {
@@ -19,7 +19,7 @@ export function incrementAngle(angle: number) {
 }
 
 export function getRandomNumber(min: number = 0, max: number = 100) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 export function generateItems<T>(numberOfItems: number, callback: () => T) {
