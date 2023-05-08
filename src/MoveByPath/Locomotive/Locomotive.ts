@@ -7,7 +7,7 @@ import srcSprite from '../assets/itemsFrame.png'
 export class Locomotive {
   x: number;
   y: number;
-  w: number = 32;
+  w: number = 64;
   h: number = 64;
   angle: number = 90;
   spin: -1 | 1;
@@ -19,8 +19,8 @@ export class Locomotive {
     private _ctx: CanvasRenderingContext2D,
     private _opt: LocomotiveOptions
   ) {
-    this.x = this._opt.position.x || 0;
-    this.y = this._opt.position.y || 0;
+    this.x = (this._opt.position.x || 0) - this._opt.tileSize / 2;
+    this.y = (this._opt.position.y || 0) - this._opt.tileSize / 2;
     this._path = mockPointsRoundCorender;
     this._destination = this._path.shift();
     this.spin = 1;
@@ -54,6 +54,7 @@ export class Locomotive {
   private _drawSteamLoco = () => {
     this._ctx.save();
     rotateObject(this._ctx, this);
+    this._ctx.strokeRect(this.x, this.y, 64, 64);
     this._img.x = this.x;
     this._img.y = this.y;
     this._img.draw()
@@ -112,8 +113,8 @@ export class Locomotive {
         this._destination.direction === "bottom" &&
         180 >= this.angle
       ) {
-        // this.x += this._opt.speed * correction;
-        // this.y += this._opt.speed * correction;
+        this.x += this._opt.speed * correction;
+        this.y += this._opt.speed * correction;
         this.angle += this._opt.speed * correction;
         return;
       }
@@ -123,8 +124,8 @@ export class Locomotive {
         this._destination.direction === "bottom" &&
         270 >= this.angle
       ) {
-        // this.x -= this._opt.speed * correction;
-        // this.y += this._opt.speed * correction;
+        this.x -= this._opt.speed * correction;
+        this.y += this._opt.speed * correction;
         this.angle += this._opt.speed * correction;
         return;
       }
@@ -134,8 +135,8 @@ export class Locomotive {
         this._destination.direction === "top" &&
         360 >= this.angle
       ) {
-        // this.x -= this._opt.speed * correction;
-        // this.y -= this._opt.speed * correction;
+        this.x -= this._opt.speed * correction;
+        this.y -= this._opt.speed * correction;
         this.angle += this._opt.speed * correction;
         return;
       }
@@ -149,8 +150,8 @@ export class Locomotive {
         this._destination.direction === "top" &&
         90 >= this.angle
       ) {
-        // this.x += this._opt.speed * correction;
-        // this.y -= this._opt.speed * correction;
+        this.x += this._opt.speed * correction;
+        this.y -= this._opt.speed * correction;
         this.angle += this._opt.speed * correction;
         return;
       }

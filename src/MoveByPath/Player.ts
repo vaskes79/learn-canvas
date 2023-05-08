@@ -16,10 +16,10 @@ export class Player {
     this.loco = new Locomotive(this._layer.ctx, {
       speed: 100,
       position: {
-        x: 128,
-        y: 128,
+        x: 100,
+        y: 100,
       },
-      tileSize: 128,
+      tileSize: 64,
       type: "steam",
     });
 
