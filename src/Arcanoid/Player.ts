@@ -10,12 +10,7 @@ export class Player {
     h: number;
     vx: number;
     vy: number;
-    minH: number;
-    maxH: number;
-    gravity: number;
     color: string;
-    isCrouch: boolean;
-    isAir: boolean;
   };
 
   constructor(
@@ -24,62 +19,38 @@ export class Player {
     private _keyboard: KeyboardControls
   ) {
     this.options = {
-      x: 0,
-      y: 0,
-      w: 32,
-      h: 64,
+      x: this._layer.sW / 2 - 100,
+      y: this._layer.sH - 32,
+      w: 200,
+      h: 32,
       vx: 700,
       vy: 0,
-      minH: 32,
-      maxH: 64,
-      isAir: true,
       color: `orange`,
-      gravity: 90,
-      isCrouch: false,
     };
     console.log(this._mouse);
   }
 
   update = (correction: number) => {
-    if (this._keyboard.keys.KeyS && this.options.h > this.options.minH) {
-      this.options.h -= 3;
-      this.options.y += 3;
-      this.options.isCrouch = true;
-    }
+    const righEdgePlatform = this.options.x + this.options.w;
+    const leftEdgePltatform = this.options.x;
 
-    if (!this._keyboard.keys.KeyS && this.options.h < this.options.maxH) {
-      this.options.h += 3;
-      this.options.isCrouch = false;
-    }
-
-    if (this._keyboard.keys.KeyD) {
+    if (this._keyboard.keys.KeyD && this._layer.sW > righEdgePlatform) {
       this.options.x += this.options.vx * correction;
     }
 
-    if (this._keyboard.keys.KeyA) {
+    if (this._keyboard.keys.KeyA && 0 < leftEdgePltatform) {
       this.options.x -= this.options.vx * correction;
     }
 
-    if (
-      this._keyboard.keys.Space &&
-      !this.options.isAir &&
-      !this.options.isCrouch
-    ) {
-      this.options.vy = -30;
-      this.options.isAir = true;
-    }
+    // if (
+    //   this._keyboard.keys.Space &&
+    //   !this.options.isAir &&
+    //   !this.options.isCrouch
+    // ) {
+    //   this.options.vy = -30;
+    //   this.options.isAir = true;
+    // }
 
-    if (this.options.isAir) {
-      this.options.vy += this.options.gravity * correction;
-    } else {
-      this.options.vy = 0;
-    }
-
-    this.options.y += this.options.vy;
-
-    if (this.options.y + this.options.h >= this._layer.sH) {
-      this.options.isAir = false;
-    }
   };
 
   display = () => {
