@@ -5,7 +5,7 @@ export class Bg {
   stars: Star[] = [];
 
   constructor(private _layer: Layer) {
-    const numStars = 1000;
+    const numStars = 50;
     const screenW = this._layer.sW;
     const screenH = this._layer.sH;
 

@@ -4,8 +4,9 @@ import { Layer } from "./Layer";
 import { Loop } from "./Loop";
 import { MouseControls } from "./MouseControls";
 import { Player } from "./Player";
-import { KeysPlayer } from "./costants";
+import { KeysPlayer, xBlockArea, yBlockArea } from "./costants";
 import { Text } from './Text'
+import { Block } from "./Block";
 
 export class Game {
   player: Player;
@@ -14,6 +15,9 @@ export class Game {
   mouse: MouseControls;
   loopControls: Loop;
   keyboard: KeyboardControls;
+  blocks: Block[] = [];
+  rows: number = 3;
+  cols: number = 7;
 
   constructor(private _container: HTMLElement) {
     const bgLayer = new Layer(this._container, 1);
@@ -25,6 +29,18 @@ export class Game {
     this.player = new Player(playerLayer, this.mouse, this.keyboard);
     this.bg = new Bg(bgLayer);
 
+
+
+    const gapForLeftAndRightEdge = (playerLayer.sW - (xBlockArea * this.cols)) / 2;
+    const gapForTop = yBlockArea + 10;
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.cols; col++) {
+        const xPos = xBlockArea * col + gapForLeftAndRightEdge;
+        const yPos = yBlockArea * row + gapForTop;
+        this.blocks.push(new Block(playerLayer, xPos, yPos));
+      }
+    }
+
     this.loopControls = new Loop(this.update, this.display);
   }
 
@@ -35,13 +51,13 @@ export class Game {
 
   display = () => {
     this.player.display();
-    this.bg.display();
     this.text.score = 0;
     this.text.display()
+    this.blocks.forEach(block => {
+      block.display()
+    })
+
+    this.bg.display();
   };
 
-  // setSpeedPlayer = (speed: number) => {
-  //   this.player.options.vx = speed;
-  //   this.player.options.vy = speed;
-  // };
 }

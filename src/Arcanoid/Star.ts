@@ -33,7 +33,7 @@ export class Star {
     if (this.opacity > 1) {
       this.factor = -1;
     } else if (this.opacity <= 0) {
-      this.factor = 1;
+      this.factor = 0.1;
 
       this.x = Math.round(Math.random() * screenW);
       this.y = Math.round(Math.random() * screenH);
@@ -42,7 +42,7 @@ export class Star {
     this.opacity += this.increment * this.factor;
 
     ctx.beginPath();
-    for (var i = 5; i--; ) {
+    for (var i = 5; i--;) {
       ctx.lineTo(0, this.length);
       ctx.translate(0, this.length);
       ctx.rotate((Math.PI * 2) / 10);
