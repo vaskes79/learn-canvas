@@ -7,7 +7,7 @@ export const initGame = (elem: HTMLElement) => {
 };
 
 export function degreesToradians(degrees: number, spin: -1 | 1 = 1) {
-  return degrees * (Math.PI / 360) * spin;
+  return (degrees * Math.PI) / 180 * spin;
 }
 
 export function incrementAngle(angle: number) {
