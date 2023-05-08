@@ -6,7 +6,7 @@ export const initGame = (elem: HTMLElement) => {
   }
 };
 
-export function degreesToradians(degrees: number, spin?: -1 | 1 = 1) {
+export function degreesToradians(degrees: number, spin: -1 | 1 = 1) {
   return degrees * (Math.PI / 360) * spin;
 }
 
