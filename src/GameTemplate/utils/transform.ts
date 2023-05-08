@@ -13,8 +13,8 @@ export function rotateObject(
 ) {
   const { angle, x, y, w, h, spin = 1 } = opt;
 
-  const middleX = x + w / 2;
-  const middleY = y + h / 2;
+  const middleX = Math.floor(x + (w / 2));
+  const middleY = Math.floor(y + (h / 2));
 
   ctx.translate(middleX, middleY);
   ctx.rotate(degreesToradians(angle, spin));
