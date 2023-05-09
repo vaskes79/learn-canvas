@@ -68,10 +68,23 @@ export class Ball {
   }
 
 
+  bumpPlatform = (platform: ElemGame) => {
+    if (platform.x) {
+      this.x += platform.x;
+    }
+
+    if (this.dy > 0) {
+      this.dy = -this.speed;
+      let touchX = this.x + this.w / 2;
+      this.dx = this.speed * -1;//platform.getTouchOffset(touchX);
+    }
+  }
+
   bumpBlock = (block: Block) => {
     this.dy *= -1;
     block.active = false;
   }
+
 
   private _collideWorldBounds() {
     let x = this.x + this.dx;

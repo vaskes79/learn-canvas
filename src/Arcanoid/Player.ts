@@ -60,6 +60,7 @@ export class Player {
       this.ball.update(correction);
       this._text.message = "Score: 0";
       this._collaideBlocks();
+      this._collaideWithPlatform();
     }
 
     if (
@@ -90,6 +91,13 @@ export class Player {
         this._text.display();
         this.ball.sounds.bump?.play();
       }
+    }
+  }
+
+  private _collaideWithPlatform = () => {
+    if (this.ball.collide(this.options)) {
+      this.ball.bumpPlatform(this);
+      this.ball.sounds.bump.play();
     }
   }
 }
