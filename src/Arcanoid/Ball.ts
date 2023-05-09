@@ -1,7 +1,14 @@
 import { getRandomNumber } from ".";
-import type { Game } from "./Game";
+import { Block } from "./Block";
 import { Layer } from "./Layer";
 import { platformHeight, ballRadius, assets } from "./costants";
+
+type ElemGame = {
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+}
 
 export class Ball {
   x: number;
@@ -47,8 +54,7 @@ export class Ball {
     ctx.fill();
   }
 
-
-  private _collide(element: { x: number, y: number, w: number, h: number }) {
+  collide(element: ElemGame) {
     let x = this.x + this.dx;
     let y = this.y + this.dy;
 
@@ -59,6 +65,12 @@ export class Ball {
       return true;
     }
     return false;
+  }
+
+
+  bumpBlock = (block: Block) => {
+    this.dy *= -1;
+    block.active = false;
   }
 
   private _collideWorldBounds() {

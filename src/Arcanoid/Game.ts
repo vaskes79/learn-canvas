@@ -40,7 +40,7 @@ export class Game {
     this.mouse = new MouseControls(this._container);
     this.keyboard = new KeyboardControls(KeysPlayer);
     this.text = new Text(textLayer);
-    this.player = new Player(playerLayer, this.mouse, this.keyboard);
+    this.player = new Player(playerLayer, this.mouse, this.keyboard, this.blocks, this.text);
     this.bg = new Bg(bgLayer);
     this.sounds = {
       bump: null
@@ -105,7 +105,6 @@ export class Game {
 
   display = () => {
     this.player.display();
-    this.text.score = 0;
     this.text.display()
     this.blocks.forEach(block => {
       block.display()

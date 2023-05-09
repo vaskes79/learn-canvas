@@ -1,7 +1,9 @@
 import { Ball } from "./Ball";
+import { Block } from "./Block";
 import type { KeyboardControls } from "./KeyboardControls";
 import type { Layer } from "./Layer";
 import type { MouseControls } from "./MouseControls";
+import type { Text } from './Text'
 import { platformHeight, platformWidth } from "./costants";
 
 export class Player {
@@ -20,7 +22,9 @@ export class Player {
   constructor(
     private _layer: Layer,
     private _mouse: MouseControls,
-    private _keyboard: KeyboardControls
+    private _keyboard: KeyboardControls,
+    private _blocks: Block[],
+    private _text: Text
   ) {
     this.options = {
       x: this._layer.sW / 2 - platformWidth / 2,
@@ -54,6 +58,8 @@ export class Player {
     if (this.isRunning) {
       this.ball.isRunning = true;
       this.ball.update(correction);
+      this._text.message = "Score: 0";
+      this._collaideBlocks();
     }
 
     if (
@@ -75,4 +81,15 @@ export class Player {
     );
     this.ball.display();
   };
+
+  private _collaideBlocks = () => {
+    for (let block of this._blocks) {
+      if (block.active && this.ball.collide(block)) {
+        this.ball.bumpBlock(block);
+        this._text.addScore();
+        this._text.display();
+        this.ball.sounds.bump?.play();
+      }
+    }
+  }
 }
