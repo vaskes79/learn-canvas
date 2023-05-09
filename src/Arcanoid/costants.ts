@@ -1,4 +1,8 @@
-import bump from './assets/sounds/bump.mp3'
+import bump from './assets/sounds/bump.mp3';
+import gameOver from './assets/sounds/game-over.wav';
+import gameStart from './assets/sounds/game-start.wav';
+import gameMusic from './assets/sounds/game-lavel-music.wav';
+import gameWin from './assets/sounds/game-win.wav';
 import ball from './assets/ball.png';
 import block from './assets/block.png';
 import platform from './assets/platform.png';
@@ -21,7 +25,11 @@ export const assets = {
   ball,
   block,
   platform,
-  background
+  background,
+  gameOver,
+  gameWin,
+  gameStart,
+  gameMusic
 }
 
 export type AssetKeysType = keyof typeof assets;

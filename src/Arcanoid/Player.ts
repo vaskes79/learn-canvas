@@ -37,7 +37,7 @@ export class Player {
       vy: 0,
       color: `orange`,
     };
-    this.ball = new Ball(this._layer);
+    this.ball = new Ball(this._layer, this._stateGame);
     console.log(this._mouse);
   }
 
@@ -71,6 +71,9 @@ export class Player {
       this.isRunning = true;
     }
 
+    if (this._stateGame.state === "fall" || this._stateGame.state === "win") {
+      this.isRunning = false;
+    }
   };
 
   display = () => {

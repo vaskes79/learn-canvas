@@ -1,6 +1,7 @@
 import { getRandomNumber } from ".";
 import { Block } from "./Block";
 import { Layer } from "./Layer";
+import { StateScreen } from "./StateScreen";
 import { platformHeight, ballRadius, assets } from "./costants";
 
 type ElemGame = {
@@ -24,13 +25,15 @@ export class Ball {
   isRunning: boolean = false;
   sounds: {
     bump: HTMLAudioElement | null;
+    gameOver: HTMLAudioElement | null;
   }
 
-  constructor(private _layer: Layer) {
+  constructor(private _layer: Layer, private _stateGame: StateScreen) {
     this.x = this._layer.sW / 2;
     this.y = this._layer.sH - platformHeight - this.r;
     this.sounds = {
-      bump: new Audio(assets.bump)
+      bump: new Audio(assets.bump),
+      gameOver: new Audio(assets.gameOver)
     }
     this.dy = -this.speed;
     this.dx = getRandomNumber(-this.speed, this.speed);
@@ -113,7 +116,8 @@ export class Ball {
       this.dy = this.speed;
       this.sounds.bump.play();
     } else if (ballBottom > worldBottom) {
-      console.log("Вы проиграли");
+      this._stateGame.state = 'fall';
+      this.sounds.gameOver?.play();
     }
   }
 }

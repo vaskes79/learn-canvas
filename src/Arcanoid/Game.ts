@@ -115,6 +115,7 @@ export class Game {
 
     if (this.keyboard.keys.Enter && this.stateScreen.state === "start") {
       this.stateScreen.state = "isRunning";
+      this.stateScreen.sounds.gameStart?.play();
     }
 
   };
