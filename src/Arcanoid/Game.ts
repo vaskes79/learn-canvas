@@ -4,7 +4,7 @@ import { Layer } from "./Layer";
 import { Loop } from "./Loop";
 import { MouseControls } from "./MouseControls";
 import { Player } from "./Player";
-import { KeysPlayer, xBlockArea, yBlockArea } from "./costants";
+import { KeysPlayer, xBlockArea, yBlockArea, assets } from "./costants";
 import { Text } from './Text'
 import { Block } from "./Block";
 
@@ -18,6 +18,20 @@ export class Game {
   blocks: Block[] = [];
   rows: number = 3;
   cols: number = 7;
+  isRunning: boolean = false;
+  isLoading: boolean = false;
+  sprites: {
+    background: HTMLImageElement | null;
+    ball: HTMLImageElement | null;
+    platform: HTMLImageElement | null;
+    block: HTMLImageElement | null;
+  }
+  sounds: {
+    bump: HTMLAudioElement | null;
+  }
+
+  private _resourceLoaaded: number = 0;
+  private _resourceCount: number = 0;
 
   constructor(private _container: HTMLElement) {
     const bgLayer = new Layer(this._container, 1);
@@ -28,8 +42,17 @@ export class Game {
     this.text = new Text(textLayer);
     this.player = new Player(playerLayer, this.mouse, this.keyboard);
     this.bg = new Bg(bgLayer);
+    this.sounds = {
+      bump: null
+    }
+    this.sprites = {
+      background: null,
+      ball: null,
+      platform: null,
+      block: null
+    }
 
-
+    this._resourceCount = Object.keys(this.sounds).length + Object.keys(this.sprites).length;
 
     const gapForLeftAndRightEdge = (playerLayer.sW - (xBlockArea * this.cols)) / 2;
     const gapForTop = yBlockArea + 10;
@@ -41,7 +64,38 @@ export class Game {
       }
     }
 
+    this._prealoadAssets();
     this.loopControls = new Loop(this.update, this.display);
+    // debug
+    // @ts-ignore: Unreachable code error
+    window.game = this;
+  }
+
+  private _prealoadAssets() {
+    this.isLoading = true;
+    for (let key in this.sounds) {
+
+      // @ts-ignore: Unreachable code error
+      this.sounds[key] = new Audio(assets[key]);
+      // @ts-ignore: Unreachable code error
+      this.sounds[key].addEventListener("canplaythrough", this._handleLoadComplete, { once: true });
+    }
+
+    for (let key in this.sprites) {
+      // @ts-ignore: Unreachable code error
+      this.sprites[key] = new Image();
+      // @ts-ignore: Unreachable code error
+      this.sprites[key].src = assets[key];
+      // @ts-ignore: Unreachable code error
+      this.sprites[key].addEventListener("load", this._handleLoadComplete);
+    }
+  }
+
+  private _handleLoadComplete = () => {
+    this._resourceLoaaded += 1;
+    if (this._resourceLoaaded >= this._resourceCount) {
+      this.isLoading = false;
+    }
   }
 
   update = (correction: number) => {
