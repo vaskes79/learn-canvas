@@ -4,6 +4,7 @@ import type { KeyboardControls } from "./KeyboardControls";
 import type { Layer } from "./Layer";
 import type { MouseControls } from "./MouseControls";
 import type { Text } from './Text'
+import type { StateScreen } from './StateScreen';
 import { platformHeight, platformWidth } from "./costants";
 
 export class Player {
@@ -24,7 +25,8 @@ export class Player {
     private _mouse: MouseControls,
     private _keyboard: KeyboardControls,
     private _blocks: Block[],
-    private _text: Text
+    private _text: Text,
+    private _stateGame: StateScreen
   ) {
     this.options = {
       x: this._layer.sW / 2 - platformWidth / 2,
@@ -64,7 +66,7 @@ export class Player {
     }
 
     if (
-      this._keyboard.keys.Space
+      this._keyboard.keys.Space && this._stateGame.state === 'isRunning'
     ) {
       this.isRunning = true;
     }

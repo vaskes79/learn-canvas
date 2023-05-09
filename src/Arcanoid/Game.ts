@@ -7,6 +7,7 @@ import { Player } from "./Player";
 import { KeysPlayer, xBlockArea, yBlockArea, assets } from "./costants";
 import { Text } from './Text'
 import { Block } from "./Block";
+import { StateScreen } from "./StateScreen";
 
 export class Game {
   player: Player;
@@ -20,6 +21,7 @@ export class Game {
   cols: number = 7;
   isRunning: boolean = false;
   isLoading: boolean = false;
+  stateScreen: StateScreen;
   sprites: {
     background: HTMLImageElement | null;
     ball: HTMLImageElement | null;
@@ -37,10 +39,19 @@ export class Game {
     const bgLayer = new Layer(this._container, 1);
     const textLayer = new Layer(this._container, 2);
     const playerLayer = new Layer(this._container, 3);
+    const layerScreen = new Layer(this._container, 4);
     this.mouse = new MouseControls(this._container);
     this.keyboard = new KeyboardControls(KeysPlayer);
     this.text = new Text(textLayer);
-    this.player = new Player(playerLayer, this.mouse, this.keyboard, this.blocks, this.text);
+    this.stateScreen = new StateScreen(layerScreen)
+    this.player = new Player(
+      playerLayer,
+      this.mouse,
+      this.keyboard,
+      this.blocks,
+      this.text,
+      this.stateScreen
+    );
     this.bg = new Bg(bgLayer);
     this.sounds = {
       bump: null
@@ -101,6 +112,11 @@ export class Game {
   update = (correction: number) => {
     this.player.update(correction);
     this.mouse.update();
+
+    if (this.keyboard.keys.Enter && this.stateScreen.state === "start") {
+      this.stateScreen.state = "isRunning";
+    }
+
   };
 
   display = () => {
@@ -111,6 +127,9 @@ export class Game {
     })
 
     this.bg.display();
+
+    this.stateScreen.display();
+
   };
 
 }
