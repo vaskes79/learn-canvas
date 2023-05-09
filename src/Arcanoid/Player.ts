@@ -53,16 +53,14 @@ export class Player {
 
     if (this.isRunning) {
       this.ball.isRunning = true;
+      this.ball.update(correction);
     }
 
-    // if (
-    //   this._keyboard.keys.Space &&
-    //   !this.options.isAir &&
-    //   !this.options.isCrouch
-    // ) {
-    //   this.options.vy = -30;
-    //   this.options.isAir = true;
-    // }
+    if (
+      this._keyboard.keys.Space
+    ) {
+      this.isRunning = true;
+    }
 
   };
 
